@@ -10,7 +10,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { studentGroups, students } from './config/students';
+import { studentGroups } from './config/students';
 import { StudentsListPage } from './pages/StudentsList';
 import { StudentDashboardPage } from './pages/StudentDashboard';
 

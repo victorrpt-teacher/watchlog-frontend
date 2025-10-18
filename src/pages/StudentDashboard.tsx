@@ -1,4 +1,4 @@
-import { Anchor, Badge, Card, Group, Stack, Title } from '@mantine/core';
+import { Anchor, Badge, Card, Group, Stack, Text, Title } from '@mantine/core';
 import { useParams, Navigate } from 'react-router-dom';
 import { students, studentGroups } from '../config/students';
 import { HealthIndicator } from '../components/HealthIndicator';

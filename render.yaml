@@ -1,0 +1,8 @@
+services:
+  - type: static
+    name: watchlog-fe
+    buildCommand: corepack enable pnpm && pnpm install && pnpm build
+    staticPublishPath: dist
+    env:
+      - key: NODE_VERSION
+        value: 20

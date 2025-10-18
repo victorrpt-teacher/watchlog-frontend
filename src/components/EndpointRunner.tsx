@@ -11,9 +11,10 @@ import {
   Textarea,
   Title,
 } from '@mantine/core';
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError } from 'axios';
+import type { AxiosRequestConfig } from 'axios';
 import { IconArrowRight, IconRefresh } from '@tabler/icons-react';
-import { EndpointConfig } from '../config/students';
+import type { EndpointConfig } from '../config/students';
 
 export interface EndpointRunnerProps {
   baseUrl: string;

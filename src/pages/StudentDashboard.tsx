@@ -1,12 +1,13 @@
 import { Anchor, Badge, Card, Group, Stack, Title } from '@mantine/core';
 import { useParams, Navigate } from 'react-router-dom';
-import { students } from '../config/students';
+import { students, studentGroups } from '../config/students';
 import { HealthIndicator } from '../components/HealthIndicator';
 import { EndpointRunner } from '../components/EndpointRunner';
 
 export function StudentDashboardPage() {
   const { studentId } = useParams<{ studentId: string }>();
   const student = students.find((item) => item.id === studentId);
+  const group = studentGroups.find((item) => item.students.some((s) => s.id === studentId));
 
   if (!student) {
     return <Navigate to="/" replace />;
@@ -20,6 +21,11 @@ export function StudentDashboardPage() {
           {student.baseUrl}
         </Anchor>
         <HealthIndicator baseUrl={student.baseUrl} healthPath={student.healthPath} />
+        {group && (
+          <Text size="sm" c="dimmed">
+            Grupo: {group.name}
+          </Text>
+        )}
       </Stack>
 
       <Card withBorder radius="md" shadow="sm">

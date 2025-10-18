@@ -10,7 +10,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { students } from './config/students';
+import { studentGroups, students } from './config/students';
 import { StudentsListPage } from './pages/StudentsList';
 import { StudentDashboardPage } from './pages/StudentDashboard';
 
@@ -52,20 +52,28 @@ function App() {
               variant={location.pathname === '/' ? 'filled' : 'subtle'}
               onClick={() => close()}
             />
-            {students.map((student) => {
-              const href = `/students/${student.id}`;
-              return (
-                <NavLink
-                  key={student.id}
-                  label={student.name}
-                  description={student.baseUrl}
-                  component={Link}
-                  to={href}
-                  active={location.pathname === href}
-                  onClick={() => close()}
-                />
-              );
-            })}
+            {studentGroups.map((group) => (
+              <Stack key={group.id} gap="xs" mt="xs">
+                <Text size="xs" fw={600} c="dimmed" px="xs">
+                  {group.name}
+                </Text>
+                {group.students.map((student) => {
+                  const href = `/students/${student.id}`;
+                  return (
+                    <NavLink
+                      key={student.id}
+                      label={student.name}
+                      description={student.baseUrl}
+                      component={Link}
+                      to={href}
+                      active={location.pathname === href}
+                      onClick={() => close()}
+                      style={{ marginLeft: 12 }}
+                    />
+                  );
+                })}
+              </Stack>
+            ))}
           </Stack>
         </ScrollArea>
       </AppShell.Navbar>

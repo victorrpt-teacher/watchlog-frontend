@@ -14,47 +14,81 @@ export interface StudentApiConfig {
   endpoints: EndpointConfig[];
 }
 
+export interface StudentGroup {
+  id: string;
+  name: string;
+  students: StudentApiConfig[];
+}
+
 /**
- * Endpoints esperados para cada API según el contexto de WatchLog.
+ * Endpoints esperados para cada API segun el contexto de WatchLog.
  * Ajusta cualquiera si un alumno expone rutas diferentes.
  */
 export const defaultEndpoints: EndpointConfig[] = [
   { label: 'Healthcheck', method: 'GET', path: '/health/' },
-  { label: 'Listar películas', method: 'GET', path: '/movies/' },
-  { label: 'Crear película', method: 'POST', path: '/movies/' },
-  { label: 'Detalle película', method: 'GET', path: '/movies/:id' },
-  { label: 'Actualizar película', method: 'PUT', path: '/movies/:id' },
-  { label: 'Eliminar película', method: 'DELETE', path: '/movies/:id' },
+  { label: 'Listar peliculas', method: 'GET', path: '/movies/' },
+  { label: 'Crear pelicula', method: 'POST', path: '/movies/' },
+  { label: 'Detalle pelicula', method: 'GET', path: '/movies/:id' },
+  { label: 'Actualizar pelicula', method: 'PUT', path: '/movies/:id' },
+  { label: 'Eliminar pelicula', method: 'DELETE', path: '/movies/:id' },
   { label: 'Listar series', method: 'GET', path: '/series/' },
   { label: 'Crear serie', method: 'POST', path: '/series/' },
   { label: 'Detalle serie', method: 'GET', path: '/series/:id' },
   { label: 'Actualizar serie', method: 'PUT', path: '/series/:id' },
   { label: 'Eliminar serie', method: 'DELETE', path: '/series/:id' },
   { label: 'Crear temporada', method: 'POST', path: '/series/:id/seasons' },
-  { label: 'Agregar película a watchlist', method: 'POST', path: '/watchlist/movies/:movie_id' },
-  { label: 'Agregar serie a watchlist', method: 'POST', path: '/watchlist/series/:series_id' },
+  {
+    label: 'Agregar pelicula a watchlist',
+    method: 'POST',
+    path: '/watchlist/movies/:movie_id',
+  },
+  {
+    label: 'Agregar serie a watchlist',
+    method: 'POST',
+    path: '/watchlist/series/:series_id',
+  },
   { label: 'Actualizar progreso serie', method: 'PATCH', path: '/progress/series/:series_id' },
   { label: 'Mi watchlist', method: 'GET', path: '/me/watchlist' },
 ];
 
 /**
- * Completa esta lista con todos los alumnos.
- * Usa un id legible (kebab-case) y la URL exacta de su deploy.
+ * Define los grupos y alumnos disponibles en el dashboard.
+ * Ajusta la estructura segun tus cohortes y despliegues reales.
  */
-export const students: StudentApiConfig[] = [
+export const studentGroups: StudentGroup[] = [
   {
-    id: 'victor-perez',
-    name: 'Victoe Pérez',
-    baseUrl: 'https://watchlog-api.onrender.com',
-    healthPath: '/health/',
-    endpoints: defaultEndpoints,
+    id: '07IDESMA',
+    name: '07IDESMA',
+    students: [
+      {
+        id: 'victor-perez',
+        name: 'Victor Perez',
+        baseUrl: 'https://watchlog-api.onrender.com',
+        healthPath: '/health/',
+        endpoints: defaultEndpoints,
+      },
+      {
+        id: 'luis-daniel',
+        name: 'Luis Daniel Bobadilla Contreras',
+        baseUrl: 'https://watchlog-ldbc.onrender.com',
+        healthPath: '/health/',
+        endpoints: defaultEndpoints,
+      },
+    ],
   },
   {
-    id: 'maria-garcia',
-    name: 'María García',
-    baseUrl: 'https://watchlog-mg.onrender.com',
-    healthPath: '/health/',
-    endpoints: defaultEndpoints,
+    id: '07IDESVA',
+    name: '07IDESVA',
+    students: [
+      {
+        id: 'maria-garcia',
+        name: 'Maria Garcia',
+        baseUrl: 'https://watchlog-mg.onrender.com',
+        healthPath: '/health/',
+        endpoints: defaultEndpoints,
+      },
+    ],
   },
-  // Agrega más alumnos aquí...
 ];
+
+export const students: StudentApiConfig[] = studentGroups.flatMap((group) => group.students);
